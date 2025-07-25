@@ -9,8 +9,8 @@
 #include "gp2y10_sensor.h"
 
 // WiFi e MQTT
-const char* ssid = "brisa-3992484";
-const char* password = "zcwbwerm";
+const char* ssid = "---";
+const char* password = "---";
 const char* mqtt_server = "demo.thingsboard.io";
 const char* token = "M3p71rB61chScJ7nyl7g";
 
