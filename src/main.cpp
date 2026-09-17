@@ -1,18 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
-<<<<<<< HEAD
-
-#include "dht11_sensor.h"
-#include "ky037_sensor.h"
-#include "mq135_sensor.h"
-#include "mq7_sensor.h"
-#include "gp2y10_sensor.h"
-
-// WiFi e MQTT
-const char* ssid = "---";
-const char* password = "---";
-=======
 #include <HTTPClient.h>
 
 #include "dht11_sensor.h"
@@ -29,7 +17,6 @@ const unsigned long intervaloBanco = 3600000;
 // WiFi e MQTT
 const char* ssid = "brisa-3992484";
 const char* password = "zcwbwerm";
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
 const char* mqtt_server = "demo.thingsboard.io";
 const char* token = "M3p71rB61chScJ7nyl7g";
 
@@ -67,8 +54,6 @@ void setup() {
   initMQ135();
   initMQ7();
   initGP2Y10();
-<<<<<<< HEAD
-=======
   initLDR();
 }
 
@@ -87,7 +72,6 @@ void enviarParaBanco(String payload) {
     }
     http.end();
   }
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
 }
 
 void loop() {
@@ -100,10 +84,7 @@ void loop() {
   float air_quality = readMQ135();
   float co = readMQ7();
   float dust = readGP2Y10();
-<<<<<<< HEAD
-=======
   int light = readLDR();
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
 
   // JSON payload
   String payload = "{";
@@ -112,19 +93,13 @@ void loop() {
   payload += "\"Ruído\":" + String(sound) + ",";
   payload += "\"VOC\":" + String(air_quality) + ",";
   payload += "\"CO\":" + String(co) + ",";
-<<<<<<< HEAD
-  payload += "\"dust\":" + String(dust);
-=======
   payload += "\"dust\":" + String(dust) + ",";
   payload += "\"light\":" + String(light);
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
   payload += "}";
 
   Serial.println(payload);
   client.publish("v1/devices/me/telemetry", payload.c_str());
 
-<<<<<<< HEAD
-=======
   unsigned long tempoAtual = millis();
   if (tempoAtual - ultimaLeituraBanco >= intervaloBanco || ultimaLeituraBanco == 0) {
     ultimaLeituraBanco = tempoAtual;
@@ -132,7 +107,6 @@ void loop() {
     enviarParaBanco(payload);
   }
 
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
   delay(10000);
 }
 

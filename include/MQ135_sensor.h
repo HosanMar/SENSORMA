@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 #include <Arduino.h>
->>>>>>> 4b5cabf (Database implementation using Flask and SQLAlchemy for handling sensor data from ESP32.)
 #ifndef MQ135_SENSOR_H
 #define MQ135_SENSOR_H
 
