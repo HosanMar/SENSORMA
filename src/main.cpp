@@ -10,9 +10,9 @@
 #include "GP2Y10_sensor.h"
 #include "ldr_sensor.h"
 
-const char* url_api = "http://192.168.0.11:5000/salvar"; 
+const char* url_api = "http://192.168.0.3:5000/salvar"; 
 unsigned long ultimaLeituraBanco = 0;
-const unsigned long intervaloBanco = 3600000; 
+const unsigned long intervaloBanco = 60000; // 1 minuto em milissegundos'
 
 // WiFi e MQTT
 const char* ssid = "brisa-3992484";
