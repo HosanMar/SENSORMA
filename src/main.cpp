@@ -9,16 +9,7 @@
 #include "MQ7_sensor.h"
 #include "GP2Y10_sensor.h"
 #include "ldr_sensor.h"
-
-const char* url_api = "http://192.168.0.3:5000/salvar"; 
-unsigned long ultimaLeituraBanco = 0;
-const unsigned long intervaloBanco = 60000; // 1 minuto em milissegundos'
-
-// WiFi e MQTT
-const char* ssid = "brisa-3992484";
-const char* password = "zcwbwerm";
-const char* mqtt_server = "demo.thingsboard.io";
-const char* token = "M3p71rB61chScJ7nyl7g";
+#include "config.h"
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -47,6 +38,11 @@ void reconnect() {
 void setup() {
   Serial.begin(115200);
   setup_wifi();
+
+  Serial.println("");
+  Serial.print("IP do ESP32: ");
+  Serial.println(WiFi.localIP());
+
   client.setServer(mqtt_server, 1883);
 
   initDHT();
@@ -90,9 +86,9 @@ void loop() {
   String payload = "{";
   payload += "\"temperatura\":" + String(temp) + ",";
   payload += "\"umidade\":" + String(hum) + ",";
-  payload += "\"Ruído\":" + String(sound) + ",";
-  payload += "\"VOC\":" + String(air_quality) + ",";
-  payload += "\"CO\":" + String(co) + ",";
+  payload += "\"ruido\":" + String(sound) + ",";
+  payload += "\"voc\":" + String(air_quality) + ",";
+  payload += "\"co\":" + String(co) + ",";
   payload += "\"dust\":" + String(dust) + ",";
   payload += "\"light\":" + String(light);
   payload += "}";

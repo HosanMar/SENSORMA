@@ -5,6 +5,8 @@ description = "Sistema de monitoramento de ambientes internos"
 authors = [
     {name = "hosana",email = "hosana.aramides@alu.ufc.br"}
 ]
+package-mode = false
+
 requires-python = ">=3.13"
 dependencies = [
     "psycopg2-binary (>=2.9.13,<3.0.0)",
@@ -14,6 +16,7 @@ dependencies = [
     "sqlalchemy (>=2.0.54,<3.0.0)",
     "pydantic (>=2.13.5,<3.0.0)"
 ]
+
 
 
 [build-system]
