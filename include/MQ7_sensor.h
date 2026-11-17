@@ -3,12 +3,11 @@
 
 #include <Arduino.h>
 
-#define MQ7_PIN 32
+#define MQ7_PIN 35
 #define RL 10000.0        // Resistência de carga (ohms) na placa do sensor
 #define V_ADC 3.3         // Tensão máxima de leitura do ADC da ESP32
 #define V_SENSOR 5.0      // Tensão de alimentação real do sensor (VCC)
-#define R0 4221.7         // Valor temporário (vamos recalibrar abaixo)
-
+#define R0 4221.7         // R0 calibrado em ar limpo (ohms)
 void initMQ7() {
   pinMode(MQ7_PIN, INPUT);
 }
@@ -22,7 +21,7 @@ float readMQ7() {
   }
   float avgAnalogValue = sum / 50.0;
   
-  // 2. Tensão direta que chega no pino (sem resistores externos)
+  // 2. Tensão direta que chega no pino
   float Vout = avgAnalogValue * (V_ADC / 4095.0); 
 
   if (Vout == 0) return 0.0; // Evita divisão por zero

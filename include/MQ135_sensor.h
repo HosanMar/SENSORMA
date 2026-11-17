@@ -21,7 +21,7 @@ float readMQ135() {
   }
   float avgAnalogValue = sum / 50.0;
 
-  // 2. Tensão lida pelo ESP32 (já atenuada pelo divisor de tensão)
+  // 2. Tensão lida pelo ESP32
   float Vout_ESP = avgAnalogValue * (V_ADC / 4095.0);
 
   if (Vout_ESP <= 0.0) return 0.0; // Evita divisão por zero
@@ -40,6 +40,13 @@ float readMQ135() {
   float b = 0.36;   // Constante de intercepto
 
   float ppm = pow(10, (a * log10(ratio) + b));
+
+  Serial.print("Rs: ");
+  Serial.print(Rs);
+  Serial.print(" | Ratio: ");
+  Serial.print(ratio);
+  Serial.print(" | ppm: ");
+  Serial.println(ppm);
 
   return ppm;
 }
