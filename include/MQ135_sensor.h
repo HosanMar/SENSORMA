@@ -2,11 +2,11 @@
 #ifndef MQ135_SENSOR_H
 #define MQ135_SENSOR_H
 
+#include "config.h"
+
 #define MQ135_PIN 34     // Utiliza GPIO34 para não conflitar com o MQ-7
 #define RL_MQ135 10000.0 // Resistência de carga RL (ohms) na placa do sensor
-#define V_ADC 3.3        // Tensão de referência do ADC da ESP32
-#define V_SENSOR 5.0     // Tensão de alimentação real do módulo
-#define R0_MQ135 20000.0 // R0 calibrado em ar limpo (ohms)
+#define R0_MQ135 37500 // R0 calibrado em ar limpo (ohms)
 
 void initMQ135() {
   pinMode(MQ135_PIN, INPUT);
@@ -36,12 +36,12 @@ float readMQ135() {
 
   // 5. Curva do datasheet (Aproximação logarítmica)
   // ppm = 10 ^ (a * log10(ratio) + b)
-  float a = -0.42;  // Inclinação angular extraída do gráfico
-  float b = 0.36;   // Constante de intercepto
+  float a = -2.381;  // Inclinação angular extraída do gráfico
+  float b = 0.857;   // Constante de intercepto
 
   float ppm = pow(10, (a * log10(ratio) + b));
 
-  Serial.print("Rs: ");
+  Serial.print(" MQ135 - Rs: ");
   Serial.print(Rs);
   Serial.print(" | Ratio: ");
   Serial.print(ratio);

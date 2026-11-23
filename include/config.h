@@ -1,7 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <Arduino.h>
+#define V_ADC 3.3         // Tensão máxima de leitura do ADC da ESP32
+#define V_SENSOR 5.0      // Tensão de alimentação real do sensor (VCC)
 
 extern const char* ssid;
 extern const char* password;
