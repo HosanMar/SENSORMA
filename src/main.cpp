@@ -74,35 +74,31 @@ void loop() {
   if (!client.connected()) reconnect();
   client.loop();
 
-  float temp = readTemperature();
-  float hum = readHumidity();
-  int sound = readKY037();
-  float air_quality = readMQ135();
-  float co = readMQ7();
-  float dust = readGP2Y10();
-  int light = readLDR();
-
-  // JSON payload
-  String payload = "{";
-  payload += "\"temperatura\":" + String(temp) + ",";
-  payload += "\"umidade\":" + String(hum) + ",";
-  payload += "\"ruido\":" + String(sound) + ",";
-  payload += "\"voc\":" + String(air_quality) + ",";
-  payload += "\"co\":" + String(co) + ",";
-  payload += "\"dust\":" + String(dust) + ",";
-  payload += "\"light\":" + String(light);
-  payload += "}";
-
-  Serial.println(payload);
-  client.publish("v1/devices/me/telemetry", payload.c_str());
-
   unsigned long tempoAtual = millis();
-  if (tempoAtual - ultimaLeituraBanco >= intervaloBanco || ultimaLeituraBanco == 0) {
-    ultimaLeituraBanco = tempoAtual;
-    Serial.println("Enviando leitura horária para o PostgreSQL...");
+  if (tempoAtual - ultimaLeitura >= intervaloLeitura || ultimaLeitura == 0) {
+    ultimaLeitura = tempoAtual;
+
+    float temp = readTemperature();
+    float hum = readHumidity();
+    int sound = readKY037();
+    float air_quality = readMQ135();
+    float co = readMQ7();
+    float dust = readGP2Y10();
+    int light = readLDR();
+
+    String payload = "{";
+    payload += "\"temperatura\":" + String(temp) + ",";
+    payload += "\"umidade\":" + String(hum) + ",";
+    payload += "\"ruido\":" + String(sound) + ",";
+    payload += "\"voc\":" + String(air_quality) + ",";
+    payload += "\"co\":" + String(co) + ",";
+    payload += "\"dust\":" + String(dust) + ",";
+    payload += "\"light\":" + String(light);
+    payload += "}";
+
+    Serial.println(payload);
+    client.publish("v1/devices/me/telemetry", payload.c_str());
     enviarParaBanco(payload);
   }
-
-  delay(10000);
 }
 

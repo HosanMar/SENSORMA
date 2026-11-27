@@ -15,7 +15,7 @@ float readMQ7() {
   long sum = 0;
   for (int i = 0; i < 50; i++) {
     sum += analogRead(MQ7_PIN);
-    delay(5); // Pequena pausa para estabilização do ADC
+    delay(5); // Pausa para estabilização do ADC
   }
   float avgAnalogValue = sum / 50.0;
   

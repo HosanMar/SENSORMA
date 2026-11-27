@@ -21,7 +21,7 @@ int readLDR() {
   // Como o ADC tem 12 bits, o valor máximo aferível é 4095
   float lightPercentage = (avgAnalogValue / 4095.0) * 100.0;
 
-  // Trava de segurança para limites visuais no ThingsBoard
+  // Trava de segurança para limites visuais 
   if (lightPercentage > 100.0) lightPercentage = 100.0;
   if (lightPercentage < 0.0) lightPercentage = 0.0;
 

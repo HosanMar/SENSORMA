@@ -9,7 +9,7 @@ extern const char* password;
 extern const char* mqtt_server;
 extern const char* token;
 extern const char* url_api;
-extern const unsigned long intervaloBanco;
-extern unsigned long ultimaLeituraBanco;
+extern const unsigned long intervaloLeitura;
+extern unsigned long ultimaLeitura;
 
 #endif

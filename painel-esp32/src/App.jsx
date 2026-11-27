@@ -12,8 +12,7 @@ function App() {
   useEffect(() => {
     const fetchLeituras = async () => {
       try {
-        // Atualize com o IP correto se necessário
-        const response = await axios.get('http://10.0.0.59/leituras');
+        const response = await axios.get('http://192.168.0.7:5000/leituras');
         
         if (response.data && response.data.length > 0) {
           // Salva a leitura mais recente (a primeira do array) para os Cards
@@ -33,7 +32,7 @@ function App() {
     };
 
     fetchLeituras();
-    const intervalo = setInterval(fetchLeituras, 60000);
+    const intervalo = setInterval(fetchLeituras, 300000);
     return () => clearInterval(intervalo);
   }, []);
 
